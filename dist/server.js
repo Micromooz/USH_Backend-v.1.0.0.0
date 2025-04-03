@@ -46,7 +46,11 @@ const ViewConfirmed_1 = __importDefault(require("./routes/ViewConfirmed"));
 const timeslots_1 = __importDefault(require("./routes/timeslots"));
 dotenv.config();
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: 'https://urbansportzhub.in',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 app.use(express_1.default.json());
 // Booking routes
 app.use("/api/bookings", bookingRoutes_1.default);
