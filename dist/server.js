@@ -36,6 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+console.log("⏳ Starting server setup...");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv = __importStar(require("dotenv"));
@@ -52,19 +53,13 @@ app.use((0, cors_1.default)({
     credentials: true
 }));
 app.use(express_1.default.json());
-// Booking routes
+console.log("📦 Registering routes...");
 app.use("/api/bookings", bookingRoutes_1.default);
-//Pending Transactions
 app.use("/api", pendingtransactions_1.default);
-//Updating Transactions
 app.use("/api", statusupdate_1.default);
-//Confirmed Bookings
 app.use("/api", ViewConfirmed_1.default);
-//Booking Slots
-app.use('/api/timeslots', timeslots_1.default);
+app.use("/api/timeslots", timeslots_1.default);
 const PORT = process.env.PORT || 5000;
-console.log("✅ /api/viewConfirmed route should now be available.");
-console.log("✅ Listening for requests...");
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });

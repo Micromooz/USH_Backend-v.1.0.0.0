@@ -17,6 +17,7 @@ const db_1 = __importDefault(require("../config/db")); // Ensure this path is co
 const router = express_1.default.Router();
 // Fetch confirmed bookings by date
 router.get("/viewConfirmed", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("🔁 /api/viewConfirmed HIT");
     try {
         const { date } = req.query;
         // Validate the date parameter

@@ -6,6 +6,7 @@ const router = express.Router();
 
 // Fetch confirmed bookings by date
 router.get("/viewConfirmed", async (req: Request, res: Response) => {
+	  console.log("🔁 /api/viewConfirmed HIT");
   try {
     const { date } = req.query;
 
