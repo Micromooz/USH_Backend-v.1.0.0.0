@@ -30,6 +30,8 @@ app.use("/api", viewConfirmedRoutes);
 //Booking Slots
 app.use('/api/timeslots', timeslotRoutes);
 const PORT = process.env.PORT || 5000;
+console.log("✅ /api/viewConfirmed route should now be available.");
+console.log("✅ Listening for requests...");
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
