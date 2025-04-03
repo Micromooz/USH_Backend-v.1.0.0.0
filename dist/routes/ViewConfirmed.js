@@ -13,14 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const db_1 = __importDefault(require("../config/db")); // Ensure this path is correct
+const db_1 = __importDefault(require("../config/db"));
 const router = express_1.default.Router();
-// Fetch confirmed bookings by date
+// ✅ Ping route to confirm the router is working
+router.get("/ping", (req, res) => {
+    console.log("✅ /api/ping HIT");
+    res.send("pong from ViewConfirmed ✅");
+});
+// ✅ Main route to fetch confirmed bookings
 router.get("/viewConfirmed", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("🔁 /api/viewConfirmed HIT");
     try {
         const { date } = req.query;
-        // Validate the date parameter
         if (!date || typeof date !== "string") {
             return res.status(400).json({ error: "Date is required and must be a string" });
         }
@@ -30,19 +34,14 @@ router.get("/viewConfirmed", (req, res) => __awaiter(void 0, void 0, void 0, fun
       FROM USHBKNG 
       WHERE Date_Booked = ? AND Status = 'Confirmed'
     `;
-        console.log("Executing SQL Query:", query, "With Date:", date);
-        // Execute the query
+        console.log("🧾 Executing SQL Query:", query, "With Date:", date);
         const [results] = yield db_1.default.execute(query, [date]);
-        console.log("Query Results:", results);
-        // Send the response
+        console.log("✅ Query Results:", results);
         res.json(results);
     }
     catch (error) {
-        console.error("🔥 Error fetching bookings:", error);
-        res.status(500).json({
-            error: "Internal Server Error",
-            details: error.message, // Sends the actual error message for debugging
-        });
+        console.error("🔥 Error in /viewConfirmed:", error);
+        res.status(500).json({ error: "Internal Server Error", details: error.message });
     }
 }));
 exports.default = router;

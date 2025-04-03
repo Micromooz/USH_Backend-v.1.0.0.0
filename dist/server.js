@@ -47,6 +47,7 @@ const ViewConfirmed_1 = __importDefault(require("./routes/ViewConfirmed"));
 const timeslots_1 = __importDefault(require("./routes/timeslots"));
 dotenv.config();
 const app = (0, express_1.default)();
+// ✅ CORS configuration
 app.use((0, cors_1.default)({
     origin: 'https://urbansportzhub.in',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -59,6 +60,12 @@ app.use("/api", pendingtransactions_1.default);
 app.use("/api", statusupdate_1.default);
 app.use("/api", ViewConfirmed_1.default);
 app.use("/api/timeslots", timeslots_1.default);
+// ✅ Catch-all 404 route
+app.use("*", (req, res) => {
+    console.log(`❌ 404 Not Found: ${req.originalUrl}`);
+    res.status(404).send("Not Found");
+});
+// ✅ Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
