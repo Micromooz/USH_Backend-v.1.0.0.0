@@ -45,6 +45,7 @@ const pendingtransactions_1 = __importDefault(require("./routes/pendingtransacti
 const statusupdate_1 = __importDefault(require("./routes/statusupdate"));
 const ViewConfirmed_1 = __importDefault(require("./routes/ViewConfirmed"));
 const timeslots_1 = __importDefault(require("./routes/timeslots"));
+const holidays_1 = __importDefault(require("./routes/holidays"));
 dotenv.config();
 const app = (0, express_1.default)();
 // ✅ CORS configuration
@@ -60,6 +61,7 @@ app.use("/api", pendingtransactions_1.default);
 app.use("/api", statusupdate_1.default);
 app.use("/api", ViewConfirmed_1.default);
 app.use("/api/timeslots", timeslots_1.default);
+app.use("/api", holidays_1.default);
 // ✅ Catch-all 404 route
 app.use("*", (req, res) => {
     console.log(`❌ 404 Not Found: ${req.originalUrl}`);

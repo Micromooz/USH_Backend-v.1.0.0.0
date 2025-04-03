@@ -9,6 +9,8 @@ import pendingtransactions from "./routes/pendingtransactions";
 import statusUpdateRoutes from "./routes/statusupdate";
 import viewConfirmedRoutes from "./routes/ViewConfirmed";
 import timeslotRoutes from "./routes/timeslots";
+import holidayRoutes from "./routes/holidays";
+
 
 dotenv.config();
 const app = express();
@@ -28,6 +30,8 @@ app.use("/api", pendingtransactions);
 app.use("/api", statusUpdateRoutes);
 app.use("/api", viewConfirmedRoutes);
 app.use("/api/timeslots", timeslotRoutes);
+app.use("/api", holidayRoutes); 
+
 
 // ✅ Catch-all 404 route
 app.use("*", (req, res) => {
